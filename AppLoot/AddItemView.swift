@@ -7,9 +7,31 @@
 
 import SwiftUI
 
+enum Rarity: CaseIterable {
+    case common, uncommon, rare, epic, legendary, unique
+}
+
 struct AddItemView: View {
+    @EnvironmentObject var inventory: Inventory
+    
+    @State var name = "Nom de l'objet"
+    @State var rarity: Rarity = Rarity.common
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            Section {
+                TextField("Nom de l'objet", text: $name)
+                Picker("Rarete", selection: $rarity) {
+                    ForEach(Rarity.allCases, id: \.self) { rarity in
+                        Text(String(describing: rarity).capitalized)
+                    }
+                }
+            }
+            Button(action: {
+            }, label: {
+                Text("Ajouter")
+            })
+        }
     }
 }
 
