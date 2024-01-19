@@ -14,3 +14,6 @@ Exercice 1 :
 Lorsque je clique sur le bouton ajouter il ne se passe rien car la liste, n'est pas mis à jour.
 J'utilise donc les fonction ObservableObject, @Published et @StateObject
 J'utilise @StateObject pour initialiser un objet observable comme propriété de la vue 'ContentView' et garantit que l’objet est créé une seule fois.
+
+Erreur LootItem => LootItem doit être conforme à Hashable. Il faut donc ajouter les conformités Identifiable et Hashable à LootItem pour permettre à SwiftUI de distinguer les instances de l'objet Lookitem.
+

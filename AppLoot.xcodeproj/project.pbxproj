@@ -12,6 +12,9 @@
 		BA6F62FB2B5A796C00F9B13B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6F62FA2B5A796C00F9B13B /* Assets.xcassets */; };
 		BA6F62FE2B5A796C00F9B13B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6F62FD2B5A796C00F9B13B /* Preview Assets.xcassets */; };
 		BA6F63052B5A801500F9B13B /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6F63042B5A801500F9B13B /* AddItemView.swift */; };
+		BADE38F22B5AA596003E8CD7 /* LootItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADE38F12B5AA596003E8CD7 /* LootItem.swift */; };
+		BADE38F42B5AA9EF003E8CD7 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADE38F32B5AA9EF003E8CD7 /* Game.swift */; };
+		BADE38F92B5AC657003E8CD7 /* LootDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADE38F82B5AC657003E8CD7 /* LootDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +24,9 @@
 		BA6F62FA2B5A796C00F9B13B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA6F62FD2B5A796C00F9B13B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA6F63042B5A801500F9B13B /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		BADE38F12B5AA596003E8CD7 /* LootItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LootItem.swift; sourceTree = "<group>"; };
+		BADE38F32B5AA9EF003E8CD7 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		BADE38F82B5AC657003E8CD7 /* LootDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LootDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,9 @@
 				BA6F62F62B5A796A00F9B13B /* AppLootApp.swift */,
 				BA6F62F82B5A796A00F9B13B /* ContentView.swift */,
 				BA6F63042B5A801500F9B13B /* AddItemView.swift */,
+				BADE38F82B5AC657003E8CD7 /* LootDetailView.swift */,
+				BADE38F32B5AA9EF003E8CD7 /* Game.swift */,
+				BADE38F12B5AA596003E8CD7 /* LootItem.swift */,
 				BA6F62FA2B5A796C00F9B13B /* Assets.xcassets */,
 				BA6F62FC2B5A796C00F9B13B /* Preview Content */,
 			);
@@ -141,7 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA6F62F92B5A796A00F9B13B /* ContentView.swift in Sources */,
+				BADE38F42B5AA9EF003E8CD7 /* Game.swift in Sources */,
 				BA6F63052B5A801500F9B13B /* AddItemView.swift in Sources */,
+				BADE38F92B5AC657003E8CD7 /* LootDetailView.swift in Sources */,
+				BADE38F22B5AA596003E8CD7 /* LootItem.swift in Sources */,
 				BA6F62F72B5A796A00F9B13B /* AppLootApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

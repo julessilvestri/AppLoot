@@ -8,14 +8,46 @@
 import SwiftUI
 
 enum Rarity: CaseIterable {
-    case common, uncommon, rare, epic, legendary, unique
+    case common
+    case uncommon
+    case rare
+    case epic
+    case legendary
+    case unique
+    
+    func getColor() -> Color {
+        switch self {
+        case .common:
+            return Color.gray
+        case .uncommon:
+            return Color.green
+        case .rare:
+            return Color.blue
+        case .epic:
+            return Color.purple
+        case .legendary:
+            return Color.yellow
+        case .unique:
+            return Color.red
+        }
+    }
 }
 
 struct AddItemView: View {
     @EnvironmentObject var inventory: Inventory
+    @Environment(\.dismiss) private var dismiss
     
-    @State var name = "Nom de l'objet"
+    @State var name: String = ""
     @State var rarity: Rarity = Rarity.common
+    @State var game: Game = Game.emptyGame
+    @State var type: ItemType = ItemType.unknown
+    @State var hasAttack: Bool = false
+    @State var attackStrength: Int = 0
+    
+    @State private var quantity = 1
+    
+    let step = 1
+    let range = 1...15
     
     var body: some View {
         Form {
@@ -27,9 +59,59 @@ struct AddItemView: View {
                     }
                 }
             }
+            Section {
+                Picker("Jeu", selection: $game) {
+                    ForEach(availableGames, id: \.self) { game in
+                        Text(String(describing: game.name).capitalized)
+                    }
+                }
+                
+                Stepper(
+                    value: $quantity,
+                    in: range,
+                    step: step
+                ) {
+                    Text("Combien : \(quantity)")
+                }
+                .padding(10)
+            }
+            
+            Section {
+                HStack {
+                    Text("Types: ")
+                    Spacer()
+                    Text(type.rawValue)
+                }
+                
+                Picker("Type", selection: $type) {
+                    ForEach(ItemType.allCases, id: \.self) { type in
+                        Text(String(describing: type.rawValue).capitalized)
+                    }
+                }
+                .pickerStyle(PalettePickerStyle())
+            }
+            
+            Section {
+                Toggle("Item d'attaque", isOn: $hasAttack)
+                if hasAttack {
+                    Stepper(value: $attackStrength, in: 1...100) {
+                        Text("Force d'attaque: \(attackStrength)")
+                    }
+                }
+            }
+            
             Button(action: {
+                inventory.addItem(
+                    quantitySelected: quantity,
+                    nameSelected: name,
+                    typeSelected: type,
+                    raritySelected: rarity,
+                    attackStrengthSelected: attackStrength,
+                    gameSelected: game
+                )
+                dismiss()
             }, label: {
-                Text("Ajouter")
+                Text("Ajouter l'objet")
             })
         }
     }
