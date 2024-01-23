@@ -17,3 +17,5 @@ J'utilise @StateObject pour initialiser un objet observable comme propriété de
 
 Erreur LootItem => LootItem doit être conforme à Hashable. Il faut donc ajouter les conformités Identifiable et Hashable à LootItem pour permettre à SwiftUI de distinguer les instances de l'objet Lookitem.
 
+Que se passe-t’il si vous n’attendez pas avant de lancer l’animation ? => Si on n'attends pas, l'animation se lance au momtn du changement de page. Donc au final on ne voit pas l'animation.
+
