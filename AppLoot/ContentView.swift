@@ -69,7 +69,14 @@ struct ContentView: View {
                         .padding()
                 } header: {
                     Text("STATISTIQUES")
-                }}
+                }
+                
+                Section{
+                    GameListWidget(loot: inventory.loot)
+                } header: {
+                    Text("VOS JEUX")
+                }
+            }
             
             
             NavigationLink {
