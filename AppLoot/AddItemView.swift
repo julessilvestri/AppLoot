@@ -49,6 +49,10 @@ struct AddItemView: View {
     let step = 1
     let range = 1...15
     
+    var isFormValid: Bool {
+        return name.count >= 3 && !name.isEmpty && type != .unknown && game != .emptyGame
+    }
+    
     var body: some View {
         Form {
             Section {
@@ -61,6 +65,7 @@ struct AddItemView: View {
             }
             Section {
                 Picker("Jeu", selection: $game) {
+                    Text(String(describing: Game.emptyGame.name).capitalized)
                     ForEach(availableGames, id: \.self) { game in
                         Text(String(describing: game.name).capitalized)
                     }
@@ -109,10 +114,12 @@ struct AddItemView: View {
                     attackStrengthSelected: attackStrength,
                     gameSelected: game
                 )
+                
                 dismiss()
             }, label: {
                 Text("Ajouter l'objet")
             })
+            .disabled(!isFormValid)
         }
     }
 }

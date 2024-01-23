@@ -17,7 +17,7 @@ struct Game: Identifiable, Hashable {
     let genre: GameGenre
     let coverName : String?
     
-    static var emptyGame = Game(name: "", genre: .unset, coverName: nil)
+    static var emptyGame = Game(name: "Non spécifié", genre: .unset, coverName: nil)
 }
 
 // Hesitez pas mettre vos propres jeux dans la liste

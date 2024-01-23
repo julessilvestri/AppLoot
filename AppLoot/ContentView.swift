@@ -7,11 +7,11 @@
 
 import SwiftUI
 
+
 class Inventory: ObservableObject {
     @Published var loot: [LootItem] = [
-        LootItem(quantity: 1, name: "Epée", type: .dagger, rarity: .common, attackStrength: 10, game: Game.emptyGame),
+        LootItem(quantity: 1, name: "Epée", type: .dagger, rarity: .common, attackStrength: 10, game: availableGames[3]),
         LootItem(quantity: 2, name: "Bouclier", type: .shield, rarity: .uncommon, attackStrength: 5, game: Game.emptyGame),
-        LootItem(quantity: 5, name: "Armure", type: .unknown, rarity: .rare, attackStrength: nil, game: Game.emptyGame),
         LootItem(quantity: 7, name: "Dragonbane Sword", type: .dagger, rarity: .epic, attackStrength: 15, game: availableGames[0]),
         LootItem(quantity: 4, name: "Frostbite Bow", type: .bow, rarity: .rare, attackStrength: 12, game: availableGames[1]),
         LootItem(quantity: 4, name: "Thunderstorm Staff", type: .magic, rarity: .legendary, attackStrength: 20, game: availableGames[2]),
@@ -50,25 +50,32 @@ struct ContentView: View {
                     NavigationLink {
                         LootDetailView(item: item)
                     } label: {
-                        HStack {
-                            Circle()
-                                .foregroundColor(item.rarity.getColor())
-                                .frame(width: 20, height: 20)
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(item.name)
-                                    .font(.headline)
-                                
-                                Text("Quantity: \(item.quantity)")
-                                    .font(.subheadline)
-                            }
-                            
-                            Spacer()
-                            
-                            Text("\(item.type.rawValue)")
-                                .font(.subheadline)
-                        }}
+                        LootRow(
+                            quantity: item.quantity,
+                            name: item.name,
+                            type: item.type,
+                            rarity: item.rarity,
+                            attackStrength: item.attackStrength,
+                            game: item.game
+                        )
+                    }
                 }
+                
+                
+                Section{
+                    BarChart(loot: inventory.loot)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.1)))
+                        .padding()
+                } header: {
+                    Text("STATISTIQUES")
+                }}
+            
+            
+            NavigationLink {
+                DragNDropDotsView()
+            } label: {
+                Text("DragAndDrop")
             }
             
             .sheet(isPresented: $showAddItemView, content: {
@@ -91,3 +98,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
