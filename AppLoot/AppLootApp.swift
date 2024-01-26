@@ -7,11 +7,21 @@
 
 import SwiftUI
 
+class OnBoardingViewModel: ObservableObject {
+    @AppStorage("isOnboardingDone") var isOnboardingDone: Bool = false
+}
+
 @main
 struct AppLootApp: App {
+    @StateObject var viewModel = OnBoardingViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if viewModel.isOnboardingDone {
+                ContentView(viewModel: viewModel)
+            } else {
+                OnBoardingView(viewModel: viewModel)
+            }
         }
     }
 }

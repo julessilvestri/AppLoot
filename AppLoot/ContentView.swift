@@ -37,73 +37,35 @@ class Inventory: ObservableObject {
     }
 }
 
-struct ContentView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
-    @StateObject var inventory = Inventory()
-    @State var showAddItemView = false
-    
-    var body: some View {
-        NavigationStack {
-            List {
-                ForEach(inventory.loot, id: \.self) { item in
-                    NavigationLink {
-                        LootDetailView(item: item)
-                    } label: {
-                        LootRow(
-                            quantity: item.quantity,
-                            name: item.name,
-                            type: item.type,
-                            rarity: item.rarity,
-                            attackStrength: item.attackStrength,
-                            game: item.game
-                        )
-                    }
-                }
-                
-                
-                Section{
-                    BarChart(loot: inventory.loot)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.1)))
-                        .padding()
-                } header: {
-                    Text("STATISTIQUES")
-                }
-                
-                Section{
-                    GameListWidget(loot: inventory.loot)
-                } header: {
-                    Text("VOS JEUX")
-                }
-            }
-            
-            
-            NavigationLink {
-                DragNDropDotsView()
-            } label: {
-                Text("DragAndDrop")
-            }
-            
-            .sheet(isPresented: $showAddItemView, content: {
-                AddItemView().environmentObject(inventory)
-            })
-            .navigationBarTitle("👜 Inventaire")
-            .toolbar(content: {
-                ToolbarItem(placement: ToolbarItemPlacement.automatic) {
-                    Button(action: {
-                        showAddItemView.toggle()
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                    })
-                }
-            })
-        }
-    }
+enum LooterFeature {
+    case loot
+    case wishList
+    case profile
 }
 
-#Preview {
-    ContentView()
+struct ContentView: View {
+    @ObservedObject var viewModel: OnBoardingViewModel
+    @State private var selectedFeature: LooterFeature = .loot
+    
+    var body: some View {
+        TabView(selection: $selectedFeature) {
+            LootView(viewModel: viewModel)
+                .tabItem {
+                    Label("Loot", systemImage: "bag.fill")
+                }
+                .tag(LooterFeature.loot)
+            WishListView()
+                .tabItem {
+                    Label("Wishlist", systemImage: "heart.fill")
+                }
+                .tag(LooterFeature.wishList)
+            ProfileView()
+                .tabItem {
+                    Label("Profil", systemImage: "person.fill")
+                }
+                .tag(LooterFeature.profile)
+        }
+    }
 }
 
 
